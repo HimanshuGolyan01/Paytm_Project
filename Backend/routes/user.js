@@ -1,6 +1,7 @@
 const express = require("express")
 const zod = require("zod")
 const User = require("../models/user")
+const Wallet = require("../models/wallet")
 const jwt = require("jsonwebtoken")
 
 const router = express.Router()
@@ -32,6 +33,11 @@ router.post("/signup", async function(req , res) {
 
     const userId = user._id
 
+    const balance = await Wallet.create({
+        userId,
+        balance : 1 + Math.random() * 10000
+    })
+
     const token = jwt.sign({
         userId
     },process.env.SECRET_KEY)
@@ -41,6 +47,8 @@ router.post("/signup", async function(req , res) {
         token: token
     })
 })
+
+
 
  const signinBody = zod.object({
     email : zod.string().email(),
