@@ -66,7 +66,7 @@ router.post("/signup", async function(req , res) {
         email : req.body.email,
     })
     if(!userExist) {
-        res.status(411).json({error : "user already exist"})
+        res.status(411).json({error : "user not exist"})
     }
 
     const userId = userExist.id;
