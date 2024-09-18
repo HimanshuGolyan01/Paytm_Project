@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Button } from "./Button"; 
 import { useNavigate } from "react-router-dom"; 
-import PaymentPage from "../Pages/Payments";
 
 export const Users = () => {
     const [filterUser, setFilterUser] = useState([]);
@@ -12,6 +11,7 @@ export const Users = () => {
         const fetchUsers = async () => {
             try {
                 const result = await axios.get(`http://localhost:8000/api/v1/alluser/bulk?filter=${filter}`);
+                console.log(result.data); 
                 setFilterUser(result.data.users);
             } catch (error) {
                 console.error("Error fetching users:", error);
@@ -23,16 +23,16 @@ export const Users = () => {
 
     return (
         <>
-            <div className="font-bold mt-6 text-lg">Users</div>
+            <div className="font-bold mt-7 text-lg ml-10">Users</div>
             <div className="my-2">
                 <input
                     onChange={(e) => setFilter(e.target.value)}
                     type="text"
                     placeholder="Search users..."
-                    className="w-full px-2 py-1 border rounded border-slate-200"
+                    className=" ml-6 w-30 p-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
             </div>
-            <div>
+            <div className="bg-blue-800">
                 {filterUser.length ? (
                     filterUser.map((user) => <User key={user._id} user={user} />)
                 ) : (

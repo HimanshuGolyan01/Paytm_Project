@@ -4,13 +4,14 @@ const authMiddleware = require("../middlewares/authMiddleware");
 
 const router = express.Router();
 
-// Route for fetching all users
+
 router.get("/alluser", authMiddleware, async (req, res) => {
   try {
     const allUsers = await User.find({});
     res.status(200).json({ users: allUsers });
   } catch (error) {
-    res.status(500).json({ error: "Error while fetching Users" });
+    console.error("Error while fetching users:", error);
+    res.status(500).json({ error: "Error while fetching users" });
   }
 });
 
@@ -30,7 +31,8 @@ router.get("/bulk", async (req, res) => {
       })),
     });
   } catch (error) {
-    res.status(500).json({ error: "Error while fetching Users with filter", details: error.message });
+    console.error("Error while fetching users with filter:", error);
+    res.status(500).json({ error: "Error while fetching users with filter", details: error.message });
   }
 });
 

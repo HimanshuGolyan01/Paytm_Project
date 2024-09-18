@@ -4,22 +4,33 @@ import { Heading } from "../components/Heading";
 import { InputBox } from "../components/InputBox";
 import { SubHeading } from "../components/SubHeading";
 import axios from 'axios';
-
+import { useNavigate } from "react-router";
 import React, { useState } from 'react';
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const Signup = () => {
+  const navigate = useNavigate();
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  
+
   async function SignupHandler() {
-  const response = await axios.post("http://localhost:8000/api/v1/user/signup",{
-      name:fullName,
-      email,
-      password
-    })
-    localStorage.setItem("token",response.data.token)
-    console.log(response)
+    try {
+      const response = await axios.post("http://localhost:8000/api/v1/user/signup", {
+        name: fullName,
+        email,
+        password
+      });
+      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("name",response.data.user)
+      console.log(response.data)
+       toast.success(response.data.message)
+      navigate("/dashboard"); 
+    } catch (error) {
+      console.error("Signup error:", error);
+      toast.error(error.message)
+    }
   }
 
   return (
@@ -44,8 +55,9 @@ const Signup = () => {
             placeholder={"Enter the Unique Password"} 
           />
           <Button 
-          onClick={SignupHandler}
-          label={"Signup"} />
+            onClick={SignupHandler}
+            label={"Signup"} 
+          />
           <BottomWarning 
             label={"Already have an account?"} 
             buttonText={"Sign in"} 
