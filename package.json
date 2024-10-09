@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon backend/index.js",
-    "build": "npm install && npm install --prefix frontend --production=false && cd /vercel/path0/frontend && npm run build",
+    "build": "npm install && npm install --prefix frontend  && cd frontend && npm run build",
     "start": "node backend/index.js"
   },
   "author": "",
