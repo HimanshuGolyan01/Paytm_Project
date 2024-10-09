@@ -21,11 +21,10 @@ app.use("/api/v1", rootRouter);
 
 const __dirname1 = path.resolve();
 if(process.env.NODE_ENV) {
-    app.use(express.static(path.join(__dirname1, './Frontend/dist')));
+    app.use(express.static(path.join(__dirname1, './frontend/dist')));
 
-
-app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname1, "./Frontend/dist/index.html")); 
+    app.get("*", (req, res) => {
+        res.sendFile(path.join(__dirname1, "./frontend/dist/index.html")); 
 });
 }
 
