@@ -19,13 +19,15 @@ app.use(express.json());
 
 app.use("/api/v1", rootRouter); 
 
-
-app.use(express.static(path.join(__dirname, '../Frontend/dist')));
+const __dirname1 = path.resolve();
+if(process.env.NODE_ENV) {
+    app.use(express.static(path.join(__dirname1, './Frontend/dist')));
 
 
 app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "../Frontend", "dist", "index.html")); 
+    res.sendFile(path.join(__dirname1, "./Frontend/dist/index.html")); 
 });
+}
 
 
 const port = process.env.PORT;
