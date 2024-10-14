@@ -17,7 +17,7 @@ const Signup = () => {
 
   async function SignupHandler() {
     try {
-      const response = await axios.post("http://localhost:8000/api/v1/user/signup", {
+      const response = await axios.post("https://paytm-project-phi.vercel.app/api/v1/user/signup", {
         name: fullName,
         email,
         password

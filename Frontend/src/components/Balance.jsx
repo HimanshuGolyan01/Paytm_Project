@@ -6,7 +6,7 @@ export const BalanceCard = ({ value }) => {
 
     useEffect(() => {
         axios
-            .get("http://localhost:8000/api/v1/transaction/balance", {
+            .get("https://paytm-project-phi.vercel.app/api/v1/transaction/balance", {
                 headers: {
                     Authorization: "Bearer " + localStorage.getItem("token"),
                 },

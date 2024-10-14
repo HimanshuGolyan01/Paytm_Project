@@ -15,7 +15,7 @@ const PaymentPage = () => {
   async function PaymentHandler() {
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/v1/transaction/transfer",
+        "https://paytm-project-phi.vercel.app/api/v1/transaction/transfer",
         {
           to: id,
           amount: amount,
